@@ -200,6 +200,8 @@ public final class ActionExportParameters extends ActionParameters {
                         "-nFeature FR3 -minFeatureQuality FR3 -nFeature CDR3 -minFeatureQuality CDR3 " +
                         "-nFeature FR4 -minFeatureQuality FR4 " +
                         "-aaFeature FR1 -aaFeature CDR1 -aaFeature FR2 -aaFeature CDR2 -aaFeature FR3 -aaFeature CDR3 -aaFeature FR4 "));
+        clones.put("vdjtools", parsePresetString(Clone.class,
+                "-count -fraction -nFeature CDR3 -aaFeature CDR3 -vHit -dHit -jHit -vEnd -dStart -dEnd -jStart -vAlignment"));
         preset.put(Clone.class, clones);
 
         Map<String, ArrayList<FieldExtractor>> alignments = new HashMap<>();
