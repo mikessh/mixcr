@@ -28,6 +28,7 @@
  */
 package com.milaboratory.mixcr.export;
 
+import com.milaboratory.core.Range;
 import com.milaboratory.core.alignment.Alignment;
 import com.milaboratory.core.sequence.AminoAcidSequence;
 import com.milaboratory.core.sequence.NSequenceWithQuality;
@@ -62,7 +63,7 @@ public final class FieldExtractors {
                 }
             });
 
-            // Best hits
+            // Best hits, segment name
             for (final GeneType type : GeneType.values()) {
                 char l = type.getLetter();
                 desctiptorsList.add(new PL_O("-" + Character.toLowerCase(l) + "Hit",
@@ -77,7 +78,7 @@ public final class FieldExtractors {
                 });
             }
 
-            // Best hits
+            // Best hits, score
             for (final GeneType type : GeneType.values()) {
                 char l = type.getLetter();
                 desctiptorsList.add(new PL_O("-" + Character.toLowerCase(l) + "HitScore",
@@ -249,6 +250,44 @@ public final class FieldExtractors {
                         "Clonal sequence quality(s)"));
 
             }
+
+            // V, D and J coordinates in respect to CDR3 region
+            desctiptorsList.add(new PL_O("-vEnd",
+                    "Export coordinate of last V segment nucleotide in respect to CDR3 region", "V end") {
+                @Override
+                protected String extract(VDJCObject object) {
+                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.GermlineVCDR3Part);
+
+                    return Integer.toString(range == null ? -1 : range.getUpper() - 1);
+                }
+            });
+            desctiptorsList.add(new PL_O("-dStart",
+                    "Export coordinate of first D segment nucleotide in respect to CDR3 region", "D start") {
+                @Override
+                protected String extract(VDJCObject object) {
+                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.DRegion);
+
+                    return Integer.toString(range == null ? -1 : range.getLower());
+                }
+            });
+            desctiptorsList.add(new PL_O("-dEnd",
+                    "Export coordinate of last D segment nucleotide in respect to CDR3 region", "D end") {
+                @Override
+                protected String extract(VDJCObject object) {
+                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.DRegion);
+
+                    return Integer.toString(range == null ? -1 : range.getUpper() - 1);
+                }
+            });
+            desctiptorsList.add(new PL_O("-jStart",
+                    "Export coordinate of first J segment nucleotide in respect to CDR3 region", "J start") {
+                @Override
+                protected String extract(VDJCObject object) {
+                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.GermlineJCDR3Part);
+
+                    return Integer.toString(range == null ? -1 : range.getLower());
+                }
+            });
 
             descriptors = desctiptorsList.toArray(new Field[desctiptorsList.size()]);
         }
