@@ -256,7 +256,7 @@ public final class FieldExtractors {
                     "Export coordinate of last V segment nucleotide in respect to CDR3 region", "V end") {
                 @Override
                 protected String extract(VDJCObject object) {
-                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.GermlineVCDR3Part);
+                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.VCDR3Part);
 
                     return Integer.toString(range == null ? -1 : range.getUpper() - 1);
                 }
@@ -265,7 +265,7 @@ public final class FieldExtractors {
                     "Export coordinate of first D segment nucleotide in respect to CDR3 region", "D start") {
                 @Override
                 protected String extract(VDJCObject object) {
-                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.DRegion);
+                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.DCDR3Part);
 
                     return Integer.toString(range == null ? -1 : range.getLower());
                 }
@@ -274,7 +274,7 @@ public final class FieldExtractors {
                     "Export coordinate of last D segment nucleotide in respect to CDR3 region", "D end") {
                 @Override
                 protected String extract(VDJCObject object) {
-                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.DRegion);
+                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.DCDR3Part);
 
                     return Integer.toString(range == null ? -1 : range.getUpper() - 1);
                 }
@@ -283,7 +283,7 @@ public final class FieldExtractors {
                     "Export coordinate of first J segment nucleotide in respect to CDR3 region", "J start") {
                 @Override
                 protected String extract(VDJCObject object) {
-                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.GermlineJCDR3Part);
+                    Range range = object.getRelativeRange(GeneFeature.CDR3, GeneFeature.JCDR3Part);
 
                     return Integer.toString(range == null ? -1 : range.getLower());
                 }
